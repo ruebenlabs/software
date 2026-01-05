@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rueben Software</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #0b0f1a;
+  --card: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.15);
+  --accent: #5b8cff;
+  --accent-2: #9f7aea;
+  --text: #e8ebf1;
+  --muted: #a0a6b8;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(1200px 600px at top, #16203b, var(--bg));
+  color: var(--text);
+}
+
+/* Header */
+header {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+}
+
+header p {
+  color: var(--muted);
+}
+
+/* Layout */
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* Product Card */
+.product {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 30px;
+  backdrop-filter: blur(20px);
+}
+
+.product img {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+}
+
+.product h2 {
+  margin-top: 0;
+  font-size: 1.8rem;
+}
+
+.product p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.price {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 20px 0;
+}
+
+.price span {
+  font-size: 1rem;
+  color: var(--muted);
+}
+
+ul {
+  padding-left: 20px;
+}
+
+/* Buttons */
+button {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border: none;
+  padding: 14px 26px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(91,140,255,0.4);
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  position: relative;
+  width: 90%;
+  max-width: 450px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 30px;
+  text-align: center;
+  backdrop-filter: blur(25px);
+}
+
+.modal-content p {
+  color: var(--muted);
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: transparent;
+  border: none;
+  font-size: 1.4rem;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: white;
+}
+
+.download {
+  margin-top: 20px;
+  display: none;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 900px) {
+  .product {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Rueben Software</h1>
+  <p>Modern tools built for power users</p>
+</header>
+
+<div class="container">
+
+  <div class="product">
+    <img src="https://dummyimage.com/600x400/111827/ffffff&text=Steam+Unlocker" alt="Steam Unlocker">
+
+    <div>
+      <h2>Steam Unlocker</h2>
+      <p>
+        Unlock Steam content for offline use with a clean, fast, and lightweight tool.
+        Built with simplicity and performance in mind.
+      </p>
+
+      <ul>
+        <li>✔ Lightweight & fast</li>
+        <li>✔ No ads</li>
+        <li>✔ Offline compatible</li>
+        <li>✔ Free forever</li>
+      </ul>
+
+      <div class="price">$0.00 <span>Free</span></div>
+
+      <button onclick="openCheckout()">Purchase</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- Checkout Modal -->
+<div class="modal" id="checkout" onclick="closeCheckout(event)">
+  <div class="modal-content">
+
+    <button class="close-btn" onclick="forceCloseCheckout()">✕</button>
+
+    <h3>Checkout</h3>
+    <p>Steam Unlocker</p>
+    <p><strong>Total: $0.00</strong></p>
+    <p>No payment method required.</p>
+
+    <button onclick="completeCheckout()">Confirm & Download</button>
+
+    <div class="download" id="download">
+      <p>✔ Purchase completed</p>
+      <a href="SteamUnlocker.zip" download>
+        <button style="margin-top:10px;">Download</button>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  © 2026 Rueben · software.rueben.xyz
+</footer>
+
+<script>
+function openCheckout() {
+  document.getElementById("checkout").style.display = "flex";
+  document.getElementById("download").style.display = "none";
+}
+
+function forceCloseCheckout() {
+  document.getElementById("checkout").style.display = "none";
+}
+
+function closeCheckout(e) {
+  if (e.target.id === "checkout") {
+    forceCloseCheckout();
+  }
+}
+
+function completeCheckout() {
+  document.getElementById("download").style.display = "block";
+}
+</script>
+
+</body>
+</html>
