@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -223,11 +224,20 @@ footer {
     <button onclick="completeCheckout()">Confirm Payment</button>
 
     <div class="download" id="download">
-      <p>✔ Purchase completed</p>
-      <a href="https://cdn.rueben.xyz/content/unlockercli/app/Unlocker.exe" download>
-        <button style="margin-top:10px;">Download</button>
-      </a>
-    </div>
+  <p>✔ Purchase completed</p>
+
+  <a href="https://cdn.rueben.xyz/content/unlockercli/app/Unlocker.exe" download>
+    <button style="margin-top:10px;">Download</button>
+  </a>
+
+  <br>
+
+  <a href="https://cdn.rueben.xyz/?path=unlockercli/patchercli-beta">
+    <button style="margin-top:12px; background: transparent; border: 1px solid var(--border); color: var(--text);">
+      View downloads server
+    </button>
+  </a>
+</div>
 
   </div>
 </div>
@@ -257,5 +267,6 @@ function completeCheckout() {
 }
 </script>
 
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"db1f725248744d31a1f92eb4173dd49f","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
