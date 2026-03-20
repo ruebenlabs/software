@@ -4,9 +4,6 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Rueben Software</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
 <style>
 :root {
   --bg: #0b0f1a;
@@ -18,80 +15,158 @@
   --muted: #a0a6b8;
 }
 
-* {
-  box-sizing: border-box;
-  font-family: "Inter", sans-serif;
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  margin: 0;
+  background: var(--bg);
+  overflow-x: hidden;
+  color: var(--text);
+  position: relative;
+  transition: background 0.3s, color 0.3s;
 }
 
-body {
-  margin: 0;
-  background: radial-gradient(1200px 600px at top, #16203b, var(--bg));
+/* Light Mode Overrides */
+body.light {
+  --bg: #f5f5f5;
+  --card: rgba(255,255,255,0.9);
+  --border: rgba(0,0,0,0.15);
+  --accent: #5b8cff;
+  --accent-2: #9f7aea;
+  --text: #0b0f1a;
+  --muted: #555;
+  background: var(--bg);
   color: var(--text);
+}
+
+/* Animated Background Particles */
+#particles {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
 }
 
 /* Header */
 header {
-  padding: 40px 20px;
   text-align: center;
+  margin-bottom: 60px;
 }
-
 header h1 {
-  font-size: 2.5rem;
+  font-size: 3rem;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-
 header p {
   color: var(--muted);
+  font-size: 1.2rem;
+  margin-top: 10px;
 }
 
-/* Layout */
+/* Light Mode Toggle */
+#modeBtn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--text);
+  cursor: pointer;
+  z-index: 1000;
+}
+
+/* Centered product */
 .container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 /* Product Card */
 .product {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 30px;
+  gap: 40px;
+  max-width: 900px;
+  width: 100%;
   background: var(--card);
-  border: 1px solid var(--border);
   border-radius: 20px;
-  padding: 30px;
-  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(25px);
+  padding: 40px;
+  position: relative;
+  box-shadow: 0 0 30px rgba(91,140,255,0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+.product:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 0 50px rgba(91,140,255,0.4);
 }
 
+/* Neon glow around card (fixed) */
+.product::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 22px;
+  pointer-events: none;
+  box-shadow: 0 0 20px #5b8cff, 0 0 40px #9f7aea, 0 0 60px #5b8cff;
+  z-index: 0;
+  transition: transform 0.2s ease;
+}
+
+/* Product Image */
 .product img {
   width: 100%;
-  border-radius: 14px;
+  border-radius: 16px;
   border: 1px solid var(--border);
+  animation: float 6s ease-in-out infinite;
+  z-index: 1;
 }
+@keyframes float {0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
+.product h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+ul {padding-left: 20px; margin-bottom: 20px;}
+ul li {margin-bottom: 8px;}
+
+/* Price */
 .price {
   font-size: 2rem;
   font-weight: 700;
-  margin: 20px 0;
+  margin-bottom: 30px;
 }
+.price span {font-size: 1rem; color: var(--muted);}
 
-/* Button */
+/* Buttons */
 button {
   background: linear-gradient(135deg, var(--accent), var(--accent-2));
   border: none;
-  padding: 14px 26px;
-  border-radius: 12px;
+  padding: 16px 32px;
+  border-radius: 16px;
   font-weight: 600;
   color: white;
   cursor: pointer;
-  transition: 0.2s;
+  font-size: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-
 button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(91,140,255,0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(91,140,255,0.5);
 }
 
-/* Modal */
+/* Modals */
 .modal {
   position: fixed;
   inset: 0;
@@ -99,8 +174,8 @@ button:hover {
   display: none;
   align-items: center;
   justify-content: center;
+  z-index: 1000;
 }
-
 .modal-content {
   position: relative;
   width: 90%;
@@ -112,7 +187,6 @@ button:hover {
   text-align: center;
   backdrop-filter: blur(25px);
 }
-
 .close-btn {
   position: absolute;
   top: 10px;
@@ -122,7 +196,7 @@ button:hover {
   font-size: 1.2rem;
 }
 
-/* SUCCESS BOX */
+/* Command Box + Pulse */
 .command-box {
   display: flex;
   justify-content: space-between;
@@ -134,8 +208,12 @@ button:hover {
   border: 1px solid var(--border);
   position: relative;
   overflow: hidden;
+  animation: pulse 2s infinite;
 }
-
+@keyframes pulse {
+  0%,100%{box-shadow:0 0 10px rgba(91,140,255,0.2)}
+  50%{box-shadow:0 0 25px rgba(91,140,255,0.4)}
+}
 .command-box::before {
   content: "";
   position: absolute;
@@ -144,61 +222,45 @@ button:hover {
   filter: blur(10px);
   opacity: 0.4;
 }
+.command-box code {z-index:1;color:#cfe3ff;font-size:0.85rem;}
+.command-box button {z-index:1;padding:8px 12px;font-size:0.8rem;position:relative;}
 
-.command-box code {
-  z-index: 1;
-  color: #cfe3ff;
-  font-size: 0.85rem;
-}
+/* Steps */
+.steps {margin-top:20px;color:var(--muted);font-size:0.9rem;}
 
-.command-box button {
-  z-index: 1;
-  padding: 8px 12px;
-  font-size: 0.8rem;
-}
-
-.steps {
-  margin-top: 20px;
-  color: var(--muted);
-  font-size: 0.9rem;
-}
+/* Footer */
+footer {text-align:center;margin-top:80px;color:var(--muted);font-size:0.9rem;}
 
 /* Responsive */
-@media (max-width: 900px) {
-  .product {
-    grid-template-columns: 1fr;
-  }
-}
+@media(max-width:900px){.product{grid-template-columns:1fr;text-align:center}.product img{margin-bottom:20px}}
 </style>
 </head>
 <body>
 
+<canvas id="particles"></canvas>
+<button id="modeBtn">Toggle Light Mode</button>
+
 <header>
   <h1>Rueben Software</h1>
-  <p>Modern tools built for power users</p>
 </header>
 
 <div class="container">
-  <div class="product">
-    <img src="https://software.rueben.xyz/img/unlocker-window.png">
-
+  <div class="product" id="productCard">
+    <img src="https://software.rueben.xyz/img/unlocker-window.png" alt="Steam Unlocker">
     <div>
-      <h2>Steam Unlocker</h2>
-      <p>Unlock Steam content for offline use.</p>
-
+      <h2>Steam Unlocker v2</h2>
       <ul>
-        <li>✔ Lightweight</li>
-        <li>✔ No ads</li>
-        <li>✔ Offline</li>
+        <li>✔ SteamTools alternative</li>
+        <li>✔ Faster and easier to use</li>
+        <li>✔ Maintained by Rueben</li>
       </ul>
-
-      <div class="price">$0.00</div>
+      <div class="price">$0.00 <span>Free</span></div>
       <button onclick="openCheckout()">Purchase</button>
     </div>
   </div>
 </div>
 
-<!-- Checkout -->
+<!-- Checkout Modal -->
 <div class="modal" id="checkout">
   <div class="modal-content">
     <button class="close-btn" onclick="closeCheckout()">✕</button>
@@ -208,56 +270,95 @@ button:hover {
   </div>
 </div>
 
-<!-- Success -->
+<!-- Success Modal -->
 <div class="modal" id="success">
   <div class="modal-content">
-
     <button class="close-btn" onclick="closeSuccess()">✕</button>
-
     <h3>🎉 Ready to Install</h3>
     <p>Run this in PowerShell:</p>
-
     <div class="command-box">
       <code id="cmd">irm https://unlock.rueben.xyz | iex</code>
-      <button onclick="copyCmd()">Copy</button>
+      <button id="copyBtn" onclick="copyCmd()">Copy</button>
     </div>
-
     <div class="steps">
       <p>1. Open PowerShell</p>
       <p>2. Paste command</p>
       <p>3. Press Enter</p>
     </div>
-
   </div>
 </div>
 
+<footer>© 2026 Rueben · software.rueben.xyz</footer>
+
 <script>
-function openCheckout() {
-  document.getElementById("checkout").style.display = "flex";
-}
+// Dark / Light Mode
+const modeBtn = document.getElementById('modeBtn');
+modeBtn.onclick = () => document.body.classList.toggle('light');
 
-function closeCheckout() {
-  document.getElementById("checkout").style.display = "none";
-}
+// Checkout & Success
+function openCheckout(){document.getElementById("checkout").style.display="flex";}
+function closeCheckout(){document.getElementById("checkout").style.display="none";}
+function completeCheckout(){closeCheckout(); showConfetti(); document.getElementById("success").style.display="flex";}
+function closeSuccess(){document.getElementById("success").style.display="none";}
 
-function completeCheckout() {
-  closeCheckout();
-  document.getElementById("success").style.display = "flex";
-}
-
-function closeSuccess() {
-  document.getElementById("success").style.display = "none";
-}
-
-function copyCmd() {
+// Copy Command
+function copyCmd(){
   const text = document.getElementById("cmd").innerText;
   navigator.clipboard.writeText(text);
-
-  const btn = document.querySelector(".command-box button");
+  const btn = document.getElementById("copyBtn");
   btn.innerText = "Copied!";
-  setTimeout(() => btn.innerText = "Copy", 1500);
+  setTimeout(()=>btn.innerText="Copy",1500);
 }
-</script>
 
+// Confetti
+function showConfetti(){
+  const duration = 1500;
+  const end = Date.now() + duration;
+  (function frame(){
+    const count = 3;
+    for(let i=0;i<count;i++){
+      const confetti = document.createElement('div');
+      confetti.style.position='fixed';
+      confetti.style.width='6px';
+      confetti.style.height='6px';
+      confetti.style.background=['#5b8cff','#9f7aea','#ff4d6d'][Math.floor(Math.random()*3)];
+      confetti.style.left=Math.random()*window.innerWidth+'px';
+      confetti.style.top='-10px';
+      confetti.style.borderRadius='50%';
+      confetti.style.opacity=1;
+      confetti.style.zIndex=2000;
+      document.body.appendChild(confetti);
+      const anim = confetti.animate([
+        { transform:'translateY(0)', opacity:1 },
+        { transform:'translateY(600px) rotate(720deg)', opacity:0 }
+      ],{ duration:Math.random()*1000+500, easing:'ease-out' });
+      anim.onfinish=()=>confetti.remove();
+    }
+    if(Date.now()<end) requestAnimationFrame(frame);
+  })();
+}
+
+// Background particles
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+const particles = [];
+for(let i=0;i<100;i++){particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2+1,d:Math.random()*0.5})}
+function drawParticles(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(255,255,255,${p.d})`;
+    ctx.fill();
+    p.y += 0.3;
+    if(p.y>canvas.height)p.y=0;
+  });
+  requestAnimationFrame(drawParticles);
+}
+drawParticles();
+window.addEventListener('resize',()=>{canvas.width=innerWidth;canvas.height=innerHeight;});
+</script>
 </body>
 </html>
