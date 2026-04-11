@@ -299,6 +299,8 @@ footer {text-align:center;margin-top:80px;color:var(--muted);font-size:0.9rem;}
     <div class="command-box">
       <code id="cmd">irm unlock.rueben.xyz | iex</code>
       <button id="copyBtn" onclick="copyCmd()">Copy</button>
+              <a onclick="openServerunlocker()">
+  <button>⚙️</button>
     </div>
     <div class="steps">
       <p>1. Open PowerShell</p>
@@ -311,7 +313,7 @@ footer {text-align:center;margin-top:80px;color:var(--muted);font-size:0.9rem;}
 <!-- Success Modal -->
 <div class="modal" id="luccess" style="display: none;">
   <div class="modal-content">
-    <button class="close-btn" onclick="closeLuccess()">✕</button>
+<button class="close-btn" onclick="closeLuccess(); closeServerunlocker();">✕</button>
     <h3>🎉 Ready to Install</h3>
     <p>⚠️ This program runs Rueben's legacy installer:</p>
         <div class="steps">
@@ -320,10 +322,40 @@ footer {text-align:center;margin-top:80px;color:var(--muted);font-size:0.9rem;}
       <p>3. Run the script</p>
     <a href="https://cdn.rueben.xyz/content/legacy/dwat/DWATv5.exe">
   <button>Install</button>
+  <a onclick="openServerdwat()">
+  <button>⚙️️️️</button>
 </a>
     </div>
     </div>
   </div>
+  
+ <!-- Download Modal -->
+<div class="modal" id="serverunlocker" style="display: none;">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeServerunlocker()">✕</button>
+    <h3>Steam Unlocker - v2</h3>
+<button onclick="window.location.href='https://cdn.rueben.xyz/content/unlockercli/app/unlocker-beta.bat'">
+  Server 1 - cdn.rueben.xyz (default)
+</button>
+<button onclick="window.location.href='https://cdn.rueben.xyz/content/unlockercli/app/unlocker-beta.bat'">
+  Server 2 - github.com
+</button>
+  </div>
+</div>
+
+ <!-- Download Modal -->
+<div class="modal" id="serverdwat" style="display: none;">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeServerdwat()">✕</button>
+    <h3>DWAT - v5</h3>
+<button onclick="window.location.href='https://cdn.rueben.xyz/content/unlockercli/app/unlocker-beta.bat'">
+  Server 1 - cdn.rueben.xyz (default)
+</button>
+<button onclick="window.location.href='https://github.com/DrevilYT/DWAT/releases/download/v5/DWATv5.exe'">
+  Server 2 - github.com
+</button>
+  </div>
+</div>
 
 <footer>© 2026 Rueben · software.rueben.xyz</footer>
 
@@ -334,10 +366,14 @@ modeBtn.onclick = () => document.body.classList.toggle('light');
 
 // Checkout & Success
 function openCheckout(){document.getElementById("checkout").style.display="flex";}
+function openServerunlocker(){document.getElementById("serverunlocker").style.display="flex";}
+function openServerdwat(){document.getElementById("serverdwat").style.display="flex";}
 function closeCheckout(){document.getElementById("checkout").style.display="none";}
 function completeCheckout(){closeCheckout(); showConfetti(); document.getElementById("success").style.display="flex";}
 function closeSuccess(){document.getElementById("success").style.display="none";}
 function closeLuccess(){document.getElementById("luccess").style.display="none";}
+function closeServerunlocker(){document.getElementById("serverunlocker").style.display="none";}
+function closeServerdwat(){document.getElementById("serverdwat").style.display="none";}
 function openLegacyprototype(){
   const modal = document.getElementById("legacyprototype");
   modal.style.display = "flex";
