@@ -1,8 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rueben Software</title>
 <style>
 :root {
@@ -234,10 +232,10 @@ footer {text-align:center;margin-top:80px;color:var(--muted);font-size:0.9rem;}
 /* Responsive */
 @media(max-width:900px){.product{grid-template-columns:1fr;text-align:center}.product img{margin-bottom:20px}}
 </style>
-</head>
+<style type="text/css" id="operaUserStyle"></style></head>
 <body>
 
-<canvas id="particles"></canvas>
+<canvas id="particles" width="1320" height="925"></canvas>
 <button id="modeBtn">Toggle Light Mode</button>
 
 <header>
@@ -248,20 +246,32 @@ footer {text-align:center;margin-top:80px;color:var(--muted);font-size:0.9rem;}
   <div class="product" id="productCard">
     <img src="https://software.rueben.xyz/img/unlocker-window.png" alt="Steam Unlocker">
     <div>
-      <h2>Steam Unlocker v2</h2>
+      <h2>Steam Unlocker - v2</h2>
       <ul>
-        <li>✔ SteamTools alternative</li>
-        <li>✔ Faster and easier to use</li>
-        <li>✔ Maintained by Rueben</li>
+        <li>SteamTools alternative</li>
+        <li>Faster and easier to use</li>
+        <li>Maintained by Rueben</li>
       </ul>
       <div class="price">$0.00 <span>Free</span></div>
       <button onclick="openCheckout()">Purchase</button>
     </div>
   </div>
-</div>
+<div class="product" id="productCard">
+    <img src="https://software.rueben.xyz/img/ss-dwat-legacy.png" alt="Steam Unlocker">
+    <div>
+      <h2>DWAT - v5</h2>
+      <ul>
+        <li>Windows Activation</li>
+        <li>Custom v5cli method</li>
+        <li>Maintained by Rueben</li>
+      </ul>
+      <div class="price">TBD<span>TBD</span></div>
+      <button onclick="openLegacyPrototype()">SOON</button>
+    </div>
+  </div></div>
 
 <!-- Checkout Modal -->
-<div class="modal" id="checkout">
+<div class="modal" id="checkout" style="display: none;">
   <div class="modal-content">
     <button class="close-btn" onclick="closeCheckout()">✕</button>
     <h3>Checkout</h3>
@@ -271,7 +281,7 @@ footer {text-align:center;margin-top:80px;color:var(--muted);font-size:0.9rem;}
 </div>
 
 <!-- Success Modal -->
-<div class="modal" id="success">
+<div class="modal" id="success" style="display: none;">
   <div class="modal-content">
     <button class="close-btn" onclick="closeSuccess()">✕</button>
     <h3>🎉 Ready to Install</h3>
@@ -360,5 +370,7 @@ function drawParticles(){
 drawParticles();
 window.addEventListener('resize',()=>{canvas.width=innerWidth;canvas.height=innerHeight;});
 </script>
-</body>
-</html>
+<script defer="" src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;db1f725248744d31a1f92eb4173dd49f&quot;,&quot;r&quot;:1,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}" crossorigin="anonymous"></script>
+
+
+</body></html>
