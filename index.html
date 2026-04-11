@@ -256,7 +256,7 @@ footer {text-align:center;margin-top:80px;color:var(--muted);font-size:0.9rem;}
       <button onclick="openCheckout()">Purchase</button>
     </div>
   </div>
-<div class="product" id="productCard">
+<div class="product" id="productCard1">
     <img src="https://software.rueben.xyz/img/ss-dwat-legacy.png" alt="Steam Unlocker">
     <div>
       <h2>DWAT - v5</h2>
@@ -266,7 +266,7 @@ footer {text-align:center;margin-top:80px;color:var(--muted);font-size:0.9rem;}
         <li>Maintained by Rueben</li>
       </ul>
       <div class="price">TBD<span>TBD</span></div>
-      <button onclick="openLegacyPrototype()">SOON</button>
+      <button onclick="openLegacyprototype()">SOON</button>
     </div>
   </div></div>
 
@@ -277,6 +277,16 @@ footer {text-align:center;margin-top:80px;color:var(--muted);font-size:0.9rem;}
     <h3>Checkout</h3>
     <p>Total: $0.00</p>
     <button onclick="completeCheckout()">Confirm</button>
+  </div>
+</div>
+
+<!-- Checkout Modal -->
+<div class="modal" id="legacyprototype" style="display: none;">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeLegacyprototype()">✕</button>
+    <h3>Checkout</h3>
+    <p>Total: TBD-dev-access</p>
+    <button onclick="completeLLL()">Confirm</button>
   </div>
 </div>
 
@@ -298,6 +308,23 @@ footer {text-align:center;margin-top:80px;color:var(--muted);font-size:0.9rem;}
   </div>
 </div>
 
+<!-- Success Modal -->
+<div class="modal" id="luccess" style="display: none;">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeLuccess()">✕</button>
+    <h3>🎉 Ready to Install</h3>
+    <p>⚠️ This program runs Rueben's legacy installer:</p>
+        <div class="steps">
+      <p>1. Download file</p>
+      <p>2. Allow and ingnore any Windows defender notifications</p>
+      <p>3. Enjoy</p>
+    <a href="https://github.com/DrevilYT/DWAT/releases/download/v5/DWATv5.exe">
+  <button>Install</button>
+</a>
+    </div>
+    </div>
+  </div>
+
 <footer>© 2026 Rueben · software.rueben.xyz</footer>
 
 <script>
@@ -310,6 +337,16 @@ function openCheckout(){document.getElementById("checkout").style.display="flex"
 function closeCheckout(){document.getElementById("checkout").style.display="none";}
 function completeCheckout(){closeCheckout(); showConfetti(); document.getElementById("success").style.display="flex";}
 function closeSuccess(){document.getElementById("success").style.display="none";}
+function closeLuccess(){document.getElementById("luccess").style.display="none";}
+function openLegacyprototype(){
+  const modal = document.getElementById("legacyprototype");
+  modal.style.display = "flex";
+}
+function closeLegacyprototype(){
+  const modal = document.getElementById("legacyprototype");
+  modal.style.display = "none";
+}
+function completeLLL(){closeLegacyprototype(); showConfetti(); document.getElementById("luccess").style.display="flex";}
 
 // Copy Command
 function copyCmd(){
